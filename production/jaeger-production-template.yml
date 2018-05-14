@@ -73,10 +73,16 @@ objects:
           ports:
           - containerPort: 14267
             protocol: TCP
-          - containerPort: 14268
-            protocol: TCP
+          - containerport: 14268
+            protocol: tcp
+          - containerport: 14269
+            protocol: tcp
           - containerPort: 9411
             protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: "/"
+              port: 14269
           volumeMounts:
           - name: jaeger-configuration-volume
             mountPath: /conf
@@ -159,10 +165,12 @@ objects:
           ports:
           - containerPort: 16686
             protocol: TCP
+          - containerPort: 16687
+            protocol: TCP
           readinessProbe:
             httpGet:
               path: "/"
-              port: 16686
+              port: 16687
           volumeMounts:
           - name: jaeger-configuration-volume
             mountPath: /conf
